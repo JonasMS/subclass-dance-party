@@ -50,6 +50,11 @@ Dancer.prototype.setPosition = function(top, left) {
   this.$node.css(styleSettings);
 };
 
+Dancer.prototype.move = function() {
+  //get random numbers for top && left
+  //setPosition with top && left
+
+};
 
 
 
