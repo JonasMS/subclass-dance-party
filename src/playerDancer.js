@@ -1,6 +1,7 @@
 var PlayerDancer = function(top, left, timeBetweenSteps) {
   Dancer.call(this, top, left, timeBetweenSteps);
   this.$node.addClass('player-dancer');
+  this.id = dancers.length;
   this.family = 'player';
   this.danceMode = 'stop';
 };

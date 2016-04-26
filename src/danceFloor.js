@@ -118,29 +118,35 @@ $(document).keydown(function(e) {
 
   var $dancer; //$('.dancer-' + index)
   //TODO: is this each loop necessary?
-  _.each(dancers, function(dancer) {
-    if (dancer.constructor === PlayerDancer) {
-      player = dancer;
-    }
-  });
+  // _.each(dancers, function(dancer) {
+  //   if (dancer.constructor === PlayerDancer) {
+  //     player = dancer;
+  //   }
+  // });
 
-  var pos = $('.dancer-' + player.id).offset();
+  var $player = $('.player-dancer');
+  var pos = $player.offset();
   var increment = 10;
   // left pressed
   if (e.which === 37) {
-    $('.dancer-' + player.id).css('left', pos.left - increment);
+    $player.css('left', pos.left - increment);
+    //TODO: wrap $player.stop() in a conditional
+    $player.stop();
   }
   // up pressed
   if (e.which === 38) {
-    $('.dancer-' + player.id).css('top', pos.top - increment);
+    $player.css('top', pos.top - increment);
+    $player.stop();
   }
   // right pressed
   if (e.which === 39) {
-    $('.dancer-' + player.id).css('left', pos.left + increment);
+    $player.css('left', pos.left + increment);
+    $player.stop();
   }
   // down pressed
   if (e.which === 40) {
-    $('.dancer-' + player.id).css('top', pos.top + increment);
+    $player.css('top', pos.top + increment);
+    $player.stop();
   }
 
   // spacebar (attack) pressed
