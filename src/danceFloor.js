@@ -25,7 +25,7 @@ $(document).ready(function() {
     //iterate through dancer objects
     _.each(dancers, function(dancer) {
       //get html object that has class dancer- + dancer.id
-      styleSettings.left += 30;
+      styleSettings.left += 80;
       dancer.danceMode = 'stop';
       $('.dancer-' + dancer.id).animate({
         top: styleSettings.top,
@@ -52,7 +52,7 @@ $(document).ready(function() {
         styleSettings.top = 100;
         hasHalved = true;
       }
-      styleSettings.top += 30;
+      styleSettings.top += 120;
       $('.dancer-' + dancer.id).animate({
         top: styleSettings.top,
         left: styleSettings.left
@@ -76,7 +76,7 @@ $(document).ready(function() {
 //--------------------
 //COLLISIONS
 
-
+  //detect collisions between WhiteWalkers + HumanDancers && enemey characters
   var detectCollisions = function() {
     //iterate thru all objects
     for (var i = 0; i < dancers.length; i++) {
@@ -85,7 +85,7 @@ $(document).ready(function() {
       for (var j = i + 1; j < dancers.length; j++) {
         pos1 = $('.dancer-' + i).offset();
         pos2 = $('.dancer-' + j).offset();
-        if ( distanceBetween( pos1.left, pos1.top, pos2.left, pos2.top) <= 20 ) {
+        if ( distanceBetween( pos1.left, pos1.top, pos2.left, pos2.top ) <= 120 ) {
           interaction(dancers[i], dancers[j]);
         }
       }
@@ -95,13 +95,16 @@ $(document).ready(function() {
   //TODO: need to lookup dancer's id? Why not just use i and j?
   //Position in dancers array should correlate with id
   var interaction = function (dancer1, dancer2) {
-    if ( dancer1.constructor === WalkerDancer ) {
+    //IF WhiteWalker comes into contact w/ HumanDancer
+    if ( dancer1.constructor === WalkerDancer && dancer2.constructor !== WalkerDancer ) {
       dancer2.constructor = WalkerDancer;
-      $('.dancer-' + dancer2.id).css('border-color', 'blue');
-    } else if ( dancer2.constructor === WalkerDancer ) {
+      dancer2.$head.css('background', 'url("assets/walkerHead.png") no-repeat');
+    } else if ( dancer2.constructor === WalkerDancer && dancer1.constructor !== WalkerDancer ) {
       dancer1.constructor = WalkerDancer;
-      $('.dancer-' + dancer1.id).css('border-color', 'blue');
+      dancer1.$head.css('background', 'url("assets/walkerHead.png") no-repeat');
     }
+
+    //IF enemy characters make contact
   };
 
 

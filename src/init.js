@@ -1,6 +1,42 @@
 $(document).ready(function() {
   window.dancers = [];
+  window.characters = [
+    {
+      name: 'joffrey',
+      body: 'dress'
+    },
+    {
+      name: 'snow',
+      body: 'dress'
+    },
+    {
+      name: 'tyrion',
+      body: 'dress'
+    }
+
+  ];
   window.player;
+
+  $('.add-all-button').on('click', function(event) {
+    //iterate thru characters
+    _.each(window.characters, function(character) {
+      
+      var dancer = new HumanDancer(
+        $('body').height() * Math.random(),
+        $('body').width() * Math.random(),
+        character
+      );
+      $('.container').append(dancer.$node);
+      dancers.push(dancer);
+      if ( dancer.constructor === PlayerDancer ) {
+        window.player = dancer;
+      }
+    });
+    //add them to the dom
+    //add to dancers
+
+  });
+
   $('.human-button, .winter-button, .player-button').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -24,8 +60,7 @@ $(document).ready(function() {
 
     var dancer = new dancerMakerFunction(
       $('body').height() * Math.random(),
-      $('body').width() * Math.random(),
-      Math.random() * 1000
+      $('body').width() * Math.random()
     );
     $('.container').append(dancer.$node);
 

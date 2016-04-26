@@ -88,17 +88,17 @@ nav li:last-child{
   /*-o-animation:      head-rotation 1s infinite; /* Opera 12+ */
   /*animation:         head-rotation 1s infinite; *//* IE 10+, Fx 29+ */
   animation: 
-      head-rotation 1s infinite 4s; 
+      head-rotation 1s infinite; 
    
   /*animation-delay: 2s, 2s;*/
 }
 
 @keyframes head-rotation {
-  from {
-    transform: rotate(0deg);
+  0%,100% {
+    transform: rotate(-10deg);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: rotate(10deg);
   }
 }
 
@@ -108,9 +108,7 @@ nav li:last-child{
   width: 100%;
   position: absolute;
 }
-
+/*
 .walker-dancer {
-  border:10px solid blue;
-  border-radius:10px;
   position:absolute;
-}
+}*/
