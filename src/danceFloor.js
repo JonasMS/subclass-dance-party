@@ -10,23 +10,29 @@ $(document).ready(function() {
     //give all dancers a new position
     
     //iterate through dancer objects
-    // _.each(dancers, function(dancer) {
-
-    // });  
-    //dancerNode = $('.dancer-' + dancer.id) ....
-
-
-    $('.dancer').each(function(dancer) {
+    _.each(dancers, function(dancer) {
+      //get html object that has class dancer- + dancer.id
       styleSettings.left += 30;
-
-      //TODO
-      // left = left of last object + its width that we saw + some fixed value (5px);
-      //$(this).css(styleSettings);
-      $(this).animate({
+      dancer.danceMode = 'stop'; 
+      $('.dancer-' + dancer.id).animate({
         top: '100px',
         left: styleSettings.left
-      }, 2000, function() {});
-    });
+      }, 2000);
+    });  
+    // dancerNode = $('.dancer-' + dancer.id) ....
+
+
+    // $('.dancer').each(function(dancer) {
+    //   styleSettings.left += 30;
+
+    //   //TODO
+    //   // left = left of last object + its width that we saw + some fixed value (5px);
+    //   //$(this).css(styleSettings);
+    //   $(this).animate({
+    //     top: '100px',
+    //     left: styleSettings.left
+    //   }, 2000, function() {});
+    // });
   };
 
 });
