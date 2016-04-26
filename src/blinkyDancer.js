@@ -6,5 +6,5 @@ HumanDancer.prototype = Object.create(Dancer.prototype);
 HumanDancer.prototype.constructor = HumanDancer;
 HumanDancer.prototype.step = function() {
   Dancer.prototype.step.call(this);
-  this.$node.toggle();
+  // this.$node.toggle();
 };

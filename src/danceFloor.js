@@ -49,4 +49,27 @@ $(document).ready(function() {
     });
   };
 
+  var distanceBetween = function(x1, y1, x2, y2) {
+    console.log('distanceBetween Run');
+    return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
+  };
+
+  var detectCollisions = function() {
+    //iterate thru all objects
+    for (var i = 0; i < dancers.length; i++) {
+
+      //iterate again
+      for (var j = i + 1; j < dancers.length; j++) {
+        $dancer1 = $('.dancer-' + i).offset();
+        $dancer2 = $('.dancer-' + j).offset();
+        if ( distanceBetween( $dancer1.left, $dancer1.top, $dancer2.left, $dancer2.top) <= 20 ) {
+        }
+      }
+    }
+
+    //
+  };
+
+  setInterval(detectCollisions, 100);
+
 });

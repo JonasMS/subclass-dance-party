@@ -43,12 +43,10 @@ Dancer.prototype.move = function() {
   var top = Math.floor(Math.random() * 500);
   var left = Math.floor(Math.random() * 500);
 
-  console.log('primary called');
   this.$node.animate({
     top: top,
     left: left
   }, 2000, function() {
-    console.log('callback called');
     if (this.danceMode !== 'stop') {
       this.move();
     }
