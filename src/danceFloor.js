@@ -1,9 +1,12 @@
 $(document).ready(function() {
 
-  $('.lineUpButton').on('click', function() { lineUp(); }); 
-  $('.cotillionButton').on('click', function() { cotillion(); }); 
+  $('.lineUp-button').on('click', function() { lineUp(); }); 
+  $('.cotillion-button').on('click', function() { cotillion(); });
+  $('.dance-button').on('click', function() { everybodyDance(); });  
   //make another button function here
 
+//--------------------
+//CONTROL CROWD
   var lineUp = function() {
     var styleSettings = {
       top: 100,
@@ -49,6 +52,21 @@ $(document).ready(function() {
     });
   };
 
+  var everybodyDance = function () {
+    console.log('here');
+    //iterate through all objects and change their state to 'dance'
+    _.each(dancers, function(dancer) {
+      if (dancer.constructor !== PlayerDancer) {
+        dancer.danceMode = 'dance';
+        dancer.move();
+      }
+    });
+  };
+
+
+
+//--------------------
+//COLLISIONS
   var distanceBetween = function(x1, y1, x2, y2) {
     return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
   };
@@ -59,29 +77,58 @@ $(document).ready(function() {
 
       //iterate again
       for (var j = i + 1; j < dancers.length; j++) {
-        $dancer1 = $('.dancer-' + i).offset();
-        $dancer2 = $('.dancer-' + j).offset();
-        if ( distanceBetween( $dancer1.left, $dancer1.top, $dancer2.left, $dancer2.top) <= 20 ) {
+        pos1 = $('.dancer-' + i).offset();
+        pos2 = $('.dancer-' + j).offset();
+        if ( distanceBetween( pos1.left, pos1.top, pos2.left, pos2.top) <= 20 ) {
           interaction(dancers[i], dancers[j]);
         }
       }
     }
-
-    //
   };
 
   var interaction = function (dancer1, dancer2) {
     if ( dancer1.constructor === WalkerDancer ) {
-      console.log('1');
-      $('.dancer-' + dancer2.id).css("border-color", "blue");
+      dancer2.constructor = WalkerDancer;
+      $('.dancer-' + dancer2.id).css('border-color', 'blue');
     } else if ( dancer2.constructor === WalkerDancer ) {
-      $('.dancer-' + dancer1.id).css("border-color", "blue");
-      console.log('2');
+      dancer1.constructor = WalkerDancer;
+      $('.dancer-' + dancer1.id).css('border-color', 'blue');
     }
   };
 
   setInterval(detectCollisions, 100);
 
+});
+
+//--------------------
+//PLAYER MOVEMENTS
+$(document).keydown(function(e) {
+  //find the player
+  var player;
+  _.each(dancers, function(dancer) {
+    if (dancer.constructor === PlayerDancer) {
+      player = dancer;
+    }
+  });
+
+  var pos = $('.dancer-' + player.id).offset(); 
+  var increment = 10;
+  // left pressed
+  if (e.which === 37) {
+    $('.dancer-' + player.id).css('left', pos.left - increment);
+  }
+  // up pressed
+  if (e.which === 38) {
+    $('.dancer-' + player.id).css('top', pos.top - increment);
+  }
+  // right pressed
+  if (e.which === 39) {
+    $('.dancer-' + player.id).css('left', pos.left + increment);
+  }
+  // down pressed
+  if (e.which === 40) {
+    $('.dancer-' + player.id).css('top', pos.top + increment);
+  }
 });
 
 

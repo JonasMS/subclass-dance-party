@@ -9,8 +9,12 @@ var Dancer = function(top, left, timeBetweenSteps) {
 
   this.step();
   this.setPosition(top, left);
-  this.move();
-
+  //
+  if (this.constructor !== PlayerDancer) { 
+    //move all but the player
+    this.move();
+  }
+ 
 
   // return dancer;
 };
@@ -47,9 +51,9 @@ Dancer.prototype.move = function() {
     top: top,
     left: left
   }, 2000, function() {
-    if (this.danceMode !== 'stop') {
-      this.move();
-    }
+    // if (this.danceMode !== 'stop') {
+    this.move();
+    // }
   }.bind(this));
 
 

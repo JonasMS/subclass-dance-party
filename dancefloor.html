@@ -6,16 +6,19 @@
     <script src="lib/jquery.js"></script>
     <script src="src/dancer.js"></script>
     <script src="lib/underscore/underscore.js"></script>
-    <script src="src/blinkyDancer.js"></script>
+    <script src="src/humanDancer.js"></script>
     <script src="src/walkerDancer.js"></script>
+    <script src="src/playerDancer.js"></script>
   </head>
   <body>
     <div class="topbar">
       <span class="title">object dance party</span>
-      <a href="#" class="nav-btn addDancerButton" data-dancer-maker-function-name="HumanDancer">add a blinky dancer</a>  
-      <a href="#" class="nav-btn winterButton" data-dancer-maker-function-name="WalkerDancer">Winter Is Coming</a> 
-      <a href="#" class="nav-btn lineUpButton">lineup</a> 
-      <a href="#" class="nav-btn cotillionButton">cotillion</a> 
+      <a href="#" class="nav-btn human-button" data-dancer-maker-function-name="HumanDancer">add a blinky dancer</a>  
+      <a href="#" class="nav-btn winter-button" data-dancer-maker-function-name="WalkerDancer">Winter Is Coming</a>
+      <a href="#" class="nav-btn player-button" data-dancer-maker-function-name="PlayerDancer">Create player</a> 
+      <a href="#" class="nav-btn lineUp-button">lineup</a> 
+      <a href="#" class="nav-btn cotillion-button">cotillion</a> 
+      <a href="#" class="nav-btn dance-button">Dance!</a> 
 
     </div> <!-- end topbar -->
     <script src="src/init.js"></script>
