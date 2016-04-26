@@ -21,17 +21,21 @@ $(document).ready(function() {
   };
   window.player;
 
-  $('.add-all-button').on('click', function(event) {
-    //iterate thru characters
-    _.each(window.characters, function(character) {
-      
-      var dancer = new HumanDancer(
+  var createDancer = function(creatorClass, character) {
+    var dancer = new creatorClass(
         $('body').height() * Math.random(),
         $('body').width() * Math.random(),
         character
       );
-      $('.container').append(dancer.$node);
-      dancers.push(dancer);
+    $('.container').append(dancer.$node);
+    dancers.push(dancer);
+  };
+
+  $('.add-all-button').on('click', function(event) {
+    //iterate thru characters
+    _.each(window.characters, function(character) {
+      
+      createDancer(HumanDancer, character);
     });
     //add them to the dom
     //add to dancers
@@ -42,13 +46,7 @@ $(document).ready(function() {
   $('.winter-button').on('click', function(event) {
     //iterate thru characters
     
-    var dancer = new WalkerDancer(
-      $('body').height() * Math.random(),
-      $('body').width() * Math.random(),
-      whiteWalker
-    );
-    $('.container').append(dancer.$node);
-    dancers.push(dancer);
+    createDancer(WalkerDancer, whiteWalker);
   });
     //add them to the dom
     //add to dancers
@@ -77,17 +75,19 @@ $(document).ready(function() {
 
     // make a dancer with a random position
 
-    var dancer = new dancerMakerFunction(
-      $('body').height() * Math.random(),
-      $('body').width() * Math.random(),
-      characters[_.random(0, characters.length - 1)]
-    );
-    $('.container').append(dancer.$node);
+    createDancer( dancerMakerFunction, characters[_.random(0, characters.length - 1)] );
 
-    dancers.push(dancer);
-    if ( dancer.constructor === PlayerDancer ) {
-      window.player = dancer;
-    }
+    // var dancer = new dancerMakerFunction(
+    //   $('body').height() * Math.random(),
+    //   $('body').width() * Math.random(),
+    //   characters[_.random(0, characters.length - 1)]
+    // );
+    // $('.container').append(dancer.$node);
+
+    // dancers.push(dancer);
+    // if ( dancer.constructor === PlayerDancer ) {
+    //   window.player = dancer;
+    // }
   });
 });
 
