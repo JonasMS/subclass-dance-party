@@ -42,7 +42,7 @@ $(document).ready(function() {
   $('.winter-button').on('click', function(event) {
     //iterate thru characters
     
-    var dancer = new HumanDancer(
+    var dancer = new WalkerDancer(
       $('body').height() * Math.random(),
       $('body').width() * Math.random(),
       whiteWalker
