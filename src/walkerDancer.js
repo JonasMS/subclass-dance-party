@@ -1,6 +1,7 @@
 var WalkerDancer = function(top, left, timeBetweenSteps) {
   Dancer.call(this, top, left, timeBetweenSteps);
   this.$node.addClass('walker-dancer');
+  this.family = 'White Walker';
 };
 
 WalkerDancer.prototype = Object.create(Dancer.prototype);

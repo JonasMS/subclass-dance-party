@@ -1,5 +1,6 @@
 var HumanDancer = function(top, left, timeBetweenSteps) {
   Dancer.call(this, top, left, timeBetweenSteps);
+  this.character = 'human';
 };
 
 HumanDancer.prototype = Object.create(Dancer.prototype);

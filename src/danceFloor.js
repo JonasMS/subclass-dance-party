@@ -50,7 +50,6 @@ $(document).ready(function() {
   };
 
   var distanceBetween = function(x1, y1, x2, y2) {
-    console.log('distanceBetween Run');
     return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
   };
 
@@ -63,6 +62,7 @@ $(document).ready(function() {
         $dancer1 = $('.dancer-' + i).offset();
         $dancer2 = $('.dancer-' + j).offset();
         if ( distanceBetween( $dancer1.left, $dancer1.top, $dancer2.left, $dancer2.top) <= 20 ) {
+          interaction(dancers[i], dancers[j]);
         }
       }
     }
@@ -70,6 +70,18 @@ $(document).ready(function() {
     //
   };
 
+  var interaction = function (dancer1, dancer2) {
+    if ( dancer1.constructor === WalkerDancer ) {
+      console.log('1');
+      $('.dancer-' + dancer2.id).css("border-color", "blue");
+    } else if ( dancer2.constructor === WalkerDancer ) {
+      $('.dancer-' + dancer1.id).css("border-color", "blue");
+      console.log('2');
+    }
+  };
+
   setInterval(detectCollisions, 100);
 
 });
+
+
