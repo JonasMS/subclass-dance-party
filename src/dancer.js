@@ -1,22 +1,21 @@
 // Creates and returns a new dancer object that can step
-var Dancer = function(top, left, timeBetweenSteps) {
+var Dancer = function(top, left, char) {
   this.id = dancers.length;
 
-  
+  // character = characters[0];
   // this.character = this.getCharacter();
   //DOM/Jquery Things
   this.$node = $('<div class="dancer dancer-' + this.id + '">' + '</div>');
-  // this.$head = $('<div class="character-head head-' + this.id + '"</div>');
-  // this.$body = $('<div class="character-body body-' + this.id + '"</div>');
-  // this.$head.css('background', 'url("assets/' + this.character.name + '.png") no-repeat');
-  // this.$body.css('background', 'url("assets/' + this.character.body + '.png") no-repeat');
+  this.$head = $('<div class="character-head head-' + this.id + '"</div>');
+  this.$body = $('<div class="character-body body-' + this.id + '"</div>');
+  this.$head.css('background', 'url("assets/' + char.name + '.png") no-repeat');
+  this.$body.css('background', 'url("assets/' + char.body + '.png") no-repeat');
 
-  // this.$node.append(this.$head);
-  // this.$node.append(this.$body);
+  this.$node.append(this.$head);
+  this.$node.append(this.$body);
 
   //Character Creation
 
-  this.timeBetweenSteps = timeBetweenSteps;
   this.danceMode = '';
 
   // this.step();
@@ -31,12 +30,12 @@ var Dancer = function(top, left, timeBetweenSteps) {
   // return dancer;
 };
 
-Dancer.prototype.step = function() {
-  // the basic dancer doesn't do anything interesting at all on each step,
-  // it just schedules the next step
-  var context = this;
-  setTimeout(context.step.bind(context), context.timeBetweenSteps);
-};
+// Dancer.prototype.step = function() {
+//   // the basic dancer doesn't do anything interesting at all on each step,
+//   // it just schedules the next step
+//   var context = this;
+//   setTimeout(context.step.bind(context), context.timeBetweenSteps);
+// };
 
 Dancer.prototype.setPosition = function(top, left) {
   // Use css top and left properties to position our <span> tag

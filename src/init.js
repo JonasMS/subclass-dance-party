@@ -15,6 +15,10 @@ $(document).ready(function() {
     }
 
   ];
+  window.whiteWalker = {
+    name: 'walkerHead',
+    body: 'dress'
+  };
   window.player;
 
   $('.add-all-button').on('click', function(event) {
@@ -28,14 +32,29 @@ $(document).ready(function() {
       );
       $('.container').append(dancer.$node);
       dancers.push(dancer);
-      if ( dancer.constructor === PlayerDancer ) {
-        window.player = dancer;
-      }
     });
     //add them to the dom
     //add to dancers
 
   });
+
+
+  $('.winter-button').on('click', function(event) {
+    //iterate thru characters
+    
+    var dancer = new HumanDancer(
+      $('body').height() * Math.random(),
+      $('body').width() * Math.random(),
+      whiteWalker
+    );
+    $('.container').append(dancer.$node);
+    dancers.push(dancer);
+  });
+    //add them to the dom
+    //add to dancers
+
+
+
 
   $('.human-button, .winter-button, .player-button').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
@@ -60,7 +79,8 @@ $(document).ready(function() {
 
     var dancer = new dancerMakerFunction(
       $('body').height() * Math.random(),
-      $('body').width() * Math.random()
+      $('body').width() * Math.random(),
+      character[0]
     );
     $('.container').append(dancer.$node);
 

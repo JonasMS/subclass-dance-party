@@ -1,5 +1,5 @@
-var PlayerDancer = function(top, left, timeBetweenSteps) {
-  Dancer.call(this, top, left, timeBetweenSteps);
+var PlayerDancer = function(top, left, character) {
+  Dancer.call(this, top, left, character);
   this.$node.addClass('player-dancer');
   this.id = dancers.length;
   this.family = 'player';
