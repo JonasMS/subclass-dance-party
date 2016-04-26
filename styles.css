@@ -89,7 +89,7 @@ nav li:last-child{
   /*animation:         head-rotation 1s infinite; *//* IE 10+, Fx 29+ */
   animation: 
       head-rotation 1s infinite; 
-   
+      
   /*animation-delay: 2s, 2s;*/
 }
 
@@ -102,13 +102,63 @@ nav li:last-child{
   }
 }
 
+@keyframes sword-rotation {
+  from {
+  transform: rotate(20deg);
+  }
+  to {
+    transform: rotate(380deg);
+  }
+}
+
+@keyframes body-fall {
+  from {
+  transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
 .character-body {
   height: inherit;
   margin: 65px 0 0 12px;
   width: 100%;
   position: absolute;
 }
-/*
-.walker-dancer {
-  position:absolute;
-}*/
+
+/*CHARACTERS*/
+
+.cersei-head {
+  margin-top: 30px;
+  margin-left: 25px;
+}
+
+.snow-head {
+  margin-top: 10px;
+}
+.tyrion-head {
+  margin-top: 15px;
+  margin-left: 28px;
+}
+.arya-head {
+  margin-top: 12px;
+  margin-left: 21px;
+  width: 90px;
+}
+.khaleesi-head {
+  margin-top: 4px;
+  margin-left: 33px;
+}
+
+.sword {
+  background: url('assets/sword.png') no-repeat;
+  width: 57px;
+  height: 300px;
+  margin-left: 97px;
+  margin-top: 62px;
+  z-index: 999;
+  position: absolute;
+  transform: rotate(20deg);
+}
+

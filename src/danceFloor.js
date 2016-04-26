@@ -3,7 +3,19 @@ var distanceBetween = function(x1, y1, x2, y2) {
 };
 
 var playerAttack = function (playerId, dancerId) {
-  $('.dancer-' + dancerId).css('border-color', 'green');
+  console.log('here');
+  //target loses head
+  dancers[dancerId].$head.animate({
+    top: 5000
+  }, 2000);
+ // dancers[dancerId].$head.effect('explode');
+  setTimeout(function() { dancers[dancerId].$head.hide(); }, 1000);
+  dancers[dancerId].danceMode = 'stop';
+  dancers[dancerId].dead = true;
+  dancers[dancerId].$body.css('animation', 'body-fall 2s');
+  setTimeout(function() { dancers[dancerId].$body.css('transform', 'rotate(90deg)'); }, 2000);
+
+
 };
 
 $(document).ready(function() {
@@ -26,11 +38,13 @@ $(document).ready(function() {
     _.each(dancers, function(dancer) {
       //get html object that has class dancer- + dancer.id
       styleSettings.left += 80;
-      dancer.danceMode = 'stop';
-      $('.dancer-' + dancer.id).animate({
-        top: styleSettings.top,
-        left: styleSettings.left
-      }, 2000);
+      if (!dancer.dead) {
+        dancer.danceMode = 'stop';
+        $('.dancer-' + dancer.id).animate({
+          top: styleSettings.top,
+          left: styleSettings.left
+        }, 2000);
+      }
     });
 
   };
@@ -45,26 +59,28 @@ $(document).ready(function() {
 
     //give each group of dancers the same x-axis, different y-axis
     _.each(dancers, function(dancer, idx, collection) {
-      dancer.danceMode = 'stop';
-      if ( idx >= (collection.length / 2) && !hasHalved ) {
-      //when half of dancers are linedUp, left += x, reset top
-        styleSettings.left = 400;
-        styleSettings.top = 100;
-        hasHalved = true;
+      if (!dancer.dead) {
+        dancer.danceMode = 'stop';
+        if ( idx >= (collection.length / 2) && !hasHalved ) {
+        //when half of dancers are linedUp, left += x, reset top
+          styleSettings.left = 400;
+          styleSettings.top = 100;
+          hasHalved = true;
+        }
+        styleSettings.top += 120;
+        $('.dancer-' + dancer.id).animate({
+          top: styleSettings.top,
+          left: styleSettings.left
+        }, 2000);
       }
-      styleSettings.top += 120;
-      $('.dancer-' + dancer.id).animate({
-        top: styleSettings.top,
-        left: styleSettings.left
-      }, 2000);
     });
   };
 
   var everybodyDance = function () {
-    console.log('here');
+    
     //iterate through all objects and change their state to 'dance'
     _.each(dancers, function(dancer) {
-      if (dancer.constructor !== PlayerDancer) {
+      if (dancer.constructor !== PlayerDancer && !dancer.dead) {
         dancer.danceMode = 'dance';
         dancer.move();
       }
@@ -127,6 +143,10 @@ $(document).keydown(function(e) {
   //   }
   // });
 
+
+
+
+
   var $player = $('.player-dancer');
   var pos = $player.offset();
   var increment = 10;
@@ -154,10 +174,13 @@ $(document).keydown(function(e) {
 
   // spacebar (attack) pressed
   if (e.which === 32) {
+   
+    dancers[player.id].$sword.css('animation', 'sword-rotation 1s');
+    setTimeout(function() { dancers[player.id].$sword.css('animation', 'none'); }, 2000);
     //detect collisions between player and all dancers
     _.each(dancers, function(dancer, idx) {
       dancer = $('.dancer-' + idx).offset();
-      if ( distanceBetween( pos.left, pos.top, dancer.left, dancer.top) <= 40 ) {
+      if ( distanceBetween( pos.left, pos.top, dancer.left, dancer.top) <= 200 ) {
         if ( idx !== player.id ) {
           playerAttack(player.id, idx);
         }

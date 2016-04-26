@@ -12,8 +12,19 @@ $(document).ready(function() {
     {
       name: 'tyrion',
       body: 'dress'
+    },
+    {
+      name: 'arya',
+      body: 'dress'
+    },
+    {
+      name: 'khaleesi',
+      body: 'dress'
+    },
+    {
+      name: 'cersei',
+      body: 'dress'
     }
-
   ];
   window.whiteWalker = {
     name: 'walkerHead',
@@ -29,30 +40,21 @@ $(document).ready(function() {
       );
     $('.container').append(dancer.$node);
     dancers.push(dancer);
+    if ( dancer.constructor === PlayerDancer ) {
+      player = dancer;
+    }
   };
 
   $('.add-all-button').on('click', function(event) {
     //iterate thru characters
     _.each(window.characters, function(character) {
-      
       createDancer(HumanDancer, character);
     });
-    //add them to the dom
-    //add to dancers
-
   });
 
-
-  $('.winter-button').on('click', function(event) {
-    //iterate thru characters
-    
+  $('.winter-button').on('click', function(event) {    
     createDancer(WalkerDancer, whiteWalker);
   });
-    //add them to the dom
-    //add to dancers
-
-
-
 
   $('.human-button, .player-button').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
@@ -76,18 +78,6 @@ $(document).ready(function() {
     // make a dancer with a random position
 
     createDancer( dancerMakerFunction, characters[_.random(0, characters.length - 1)] );
-
-    // var dancer = new dancerMakerFunction(
-    //   $('body').height() * Math.random(),
-    //   $('body').width() * Math.random(),
-    //   characters[_.random(0, characters.length - 1)]
-    // );
-    // $('.container').append(dancer.$node);
-
-    // dancers.push(dancer);
-    // if ( dancer.constructor === PlayerDancer ) {
-    //   window.player = dancer;
-    // }
   });
 });
 
