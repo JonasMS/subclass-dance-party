@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 
 
-  $('.human-button, .winter-button, .player-button').on('click', function(event) {
+  $('.human-button, .player-button').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
      * As long as the "data-dancer-maker-function-name" attribute of a
@@ -80,7 +80,7 @@ $(document).ready(function() {
     var dancer = new dancerMakerFunction(
       $('body').height() * Math.random(),
       $('body').width() * Math.random(),
-      character[0]
+      characters[_.random(0, characters.length - 1)]
     );
     $('.container').append(dancer.$node);
 
