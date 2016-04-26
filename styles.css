@@ -12,7 +12,6 @@ body{
   margin: 0px;
   background-color:#444;
   font-size: 12px;
-  background: rgba(197,224,255,0.16) url("blue-stripe-bg.png");
 };
 }
 body, a:link, a:visited, a:active{
@@ -66,9 +65,48 @@ nav li:last-child{
   background-color: #777;
 }
 .dancer{
-  border:10px solid red;
-  border-radius:10px;
+
+  height: 300px;
+  width: 150px;
   position:absolute;
+
+}
+
+.dancer span {
+  height: 100%;
+  width:100%;
+}
+
+.character-head { 
+  height: 115px;
+  margin: 0 0 0 35px;
+  width: 54%;
+  position: absolute;
+  z-index: 1;
+ /* -webkit-animation: head-rotation 1s infinite; /* Safari 4+ */
+/*  -moz-animation:    head-rotation 1s infinite; /* Fx 5+ */
+  /*-o-animation:      head-rotation 1s infinite; /* Opera 12+ */
+  /*animation:         head-rotation 1s infinite; *//* IE 10+, Fx 29+ */
+  animation: 
+      head-rotation 1s infinite 4s; 
+   
+  /*animation-delay: 2s, 2s;*/
+}
+
+@keyframes head-rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.character-body {
+  height: inherit;
+  margin: 65px 0 0 12px;
+  width: 100%;
+  position: absolute;
 }
 
 .walker-dancer {

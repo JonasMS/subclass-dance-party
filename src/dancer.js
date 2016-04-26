@@ -1,10 +1,23 @@
 // Creates and returns a new dancer object that can step
 var Dancer = function(top, left, timeBetweenSteps) {
   this.id = dancers.length;
- 
-  this.$node = $('<span class="dancer dancer-' + this.id + '"></span>');
-  this.timeBetweenSteps = timeBetweenSteps;
+
   
+  this.character = this.getCharacter();
+  //DOM/Jquery Things
+  this.$node = $('<div class="dancer dancer-' + this.id + '">' + '</div>');
+  this.$head = $('<div class="character-head head-' + this.id + '"</div>');
+  this.$body = $('<div class="character-body body-' + this.id + '"</div>');
+  this.$head.css('background', 'url("assets/' + this.character.name + '.png") no-repeat');
+  this.$body.css('background', 'url("assets/' + this.character.body + '.png") no-repeat');
+  // this.$head.css('background', 'url("assets/joffrey.png")');
+  // this.$body.css('background', 'url("assets/dress.png")');
+  this.$node.append(this.$head);
+  this.$node.append(this.$body);
+
+  //Character Creation
+
+  this.timeBetweenSteps = timeBetweenSteps;
   this.danceMode = '';
 
   this.step();
@@ -55,6 +68,20 @@ Dancer.prototype.move = function() {
     this.move();
     // }
   }.bind(this));
+};
+
+Dancer.prototype.getCharacter = function() {
+  var characters = [
+    {
+      name: 'joffrey',
+      body: 'dress'
+    },
+    {
+      name: 'whiteWalker',
+      body: 'whiteWalker'
+    }
+  ];
+  return characters[0];
 };
 
 

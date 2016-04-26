@@ -1,6 +1,6 @@
 var distanceBetween = function(x1, y1, x2, y2) {
-    return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
-  };
+  return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
+};
 
 var playerAttack = function (playerId, dancerId) {
   $('.dancer-' + dancerId).css('border-color', 'green');
@@ -114,7 +114,7 @@ $(document).ready(function() {
 //PLAYER MOVEMENTS
 $(document).keydown(function(e) {
   //find the player
-  var player;
+ 
 
   var $dancer; //$('.dancer-' + index)
   //TODO: is this each loop necessary?
@@ -155,7 +155,7 @@ $(document).keydown(function(e) {
     _.each(dancers, function(dancer, idx) {
       dancer = $('.dancer-' + idx).offset();
       if ( distanceBetween( pos.left, pos.top, dancer.left, dancer.top) <= 40 ) {
-        if ( idx !== player.id ){
+        if ( idx !== player.id ) {
           playerAttack(player.id, idx);
         }
       }
