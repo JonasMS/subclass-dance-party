@@ -55,8 +55,6 @@ Dancer.prototype.move = function() {
     this.move();
     // }
   }.bind(this));
-
-
 };
 
 

@@ -11,16 +11,25 @@
     <script src="src/playerDancer.js"></script>
   </head>
   <body>
-    <div class="topbar">
-      <span class="title">object dance party</span>
-      <a href="#" class="nav-btn human-button" data-dancer-maker-function-name="HumanDancer">add a blinky dancer</a>  
-      <a href="#" class="nav-btn winter-button" data-dancer-maker-function-name="WalkerDancer">Winter Is Coming</a>
-      <a href="#" class="nav-btn player-button" data-dancer-maker-function-name="PlayerDancer">Create player</a> 
-      <a href="#" class="nav-btn lineUp-button">lineup</a> 
-      <a href="#" class="nav-btn cotillion-button">cotillion</a> 
-      <a href="#" class="nav-btn dance-button">Dance!</a> 
+    <div class="container">
+      <nav class="topbar">
+        <ul>
+          <li><a href="#" class="nav-btn human-button" data-dancer-maker-function-name="HumanDancer">add a blinky dancer</a></li>  
+          <li><a href="#" class="nav-btn winter-button" data-dancer-maker-function-name="WalkerDancer">Winter Is Coming</a></li>
+          <li><a href="#" class="nav-btn player-button" data-dancer-maker-function-name="PlayerDancer">Create player</a></li> 
+          <li><a href="#" class="nav-btn lineUp-button">lineup</a></li> 
+          <li><a href="#" class="nav-btn cotillion-button">cotillion</a></li> 
+          <li><a href="#" class="nav-btn dance-button">Dance</a></li> 
+          <li><span class="title">DANCE OF THRONES</span></li>
+        </ul>
+      </nav> <!-- end topbar -->
 
-    </div> <!-- end topbar -->
+      <!-- dancefloor -->
+      <div class="dancefloor">
+
+      </div>
+    </div>
+
     <script src="src/init.js"></script>
     <script src="src/danceFloor.js"></script>
   </body>
