@@ -42,8 +42,8 @@ Dancer.prototype.move = function() {
     return;
   }
 
-  var top = Math.floor(Math.random() * 500);
-  var left = Math.floor(Math.random() * 500);
+  var top = Math.floor(Math.random() * ($(window).height() - 300));
+  var left = Math.floor(Math.random() * ($(window).width() - 300));
 
   this.$node.animate({
     top: top,

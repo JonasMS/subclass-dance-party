@@ -33,13 +33,21 @@ $(document).ready(function() {
   window.player;
 
   var createDancer = function(creatorClass, character) {
+    
+    var top = Math.floor(Math.random() * ($(window).height() - 300));
+    var left = Math.floor(Math.random() * ($(window).width() - 300));
+    top = creatorClass === PlayerDancer ? $(window).height() / 2 - 150 : top;
+    left = creatorClass === PlayerDancer ? $(window).width() / 2 - 50 : left;
+    
     var dancer = new creatorClass(
-        $('body').height() * Math.random(),
-        $('body').width() * Math.random(),
+        top,
+        left,
         character
       );
+
     $('.container').append(dancer.$node);
     dancers.push(dancer);
+    
     if ( dancer.constructor === PlayerDancer ) {
       player = dancer;
     }
@@ -56,7 +64,7 @@ $(document).ready(function() {
     createDancer(WalkerDancer, whiteWalker);
   });
 
-  $('.human-button, .player-button').on('click', function(event) {
+  $('.human-button').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
      * As long as the "data-dancer-maker-function-name" attribute of a
@@ -64,7 +72,7 @@ $(document).ready(function() {
      * maker functions available in the global scope, clicking that node
      * will call the function to make the dancer.
      */
-
+    
     /* dancerMakerFunctionName is a string which must match
      * one of the dancer maker functions available in global scope.
      * A new object of the given type will be created and added
@@ -79,5 +87,6 @@ $(document).ready(function() {
 
     createDancer( dancerMakerFunction, characters[_.random(0, characters.length - 1)] );
   });
+  createDancer( PlayerDancer, characters[_.random(0, characters.length - 1)] );
 });
 

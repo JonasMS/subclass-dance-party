@@ -3,17 +3,20 @@ var distanceBetween = function(x1, y1, x2, y2) {
 };
 
 var playerAttack = function (playerId, dancerId) {
-  console.log('here');
   //target loses head
   dancers[dancerId].$head.animate({
-    top: 5000
+    top: 200
   }, 2000);
  // dancers[dancerId].$head.effect('explode');
-  setTimeout(function() { dancers[dancerId].$head.hide(); }, 1000);
+  dancers[dancerId].$head.fadeOut('slow');
   dancers[dancerId].danceMode = 'stop';
   dancers[dancerId].dead = true;
   dancers[dancerId].$body.css('animation', 'body-fall 2s');
   setTimeout(function() { dancers[dancerId].$body.css('transform', 'rotate(90deg)'); }, 2000);
+  setTimeout(function() { 
+    dancers[dancerId].$body.fadeOut('slow');
+    // dancers.splice(dancerId); 
+  }, 1000);
 
 
 };
@@ -112,10 +115,10 @@ $(document).ready(function() {
   //Position in dancers array should correlate with id
   var interaction = function (dancer1, dancer2) {
     //IF WhiteWalker comes into contact w/ HumanDancer
-    if ( dancer1.constructor === WalkerDancer && dancer2.constructor !== WalkerDancer ) {
+    if ( dancer1.constructor === WalkerDancer && !dancer1.dead && dancer2.constructor !== WalkerDancer ) {
       dancer2.constructor = WalkerDancer;
       dancer2.$head.css('background', 'url("assets/walkerHead.png") no-repeat');
-    } else if ( dancer2.constructor === WalkerDancer && dancer1.constructor !== WalkerDancer ) {
+    } else if ( dancer2.constructor === WalkerDancer && !dancer2.dead && dancer1.constructor !== WalkerDancer ) {
       dancer1.constructor = WalkerDancer;
       dancer1.$head.css('background', 'url("assets/walkerHead.png") no-repeat');
     }
@@ -150,30 +153,31 @@ $(document).keydown(function(e) {
   var $player = $('.player-dancer');
   var pos = $player.offset();
   var increment = 10;
-  // left pressed
-  if (e.which === 37) {
-    $player.css('left', pos.left - increment);
+
+  var left = pos.left - increment; 
+  var up = pos.top - increment;
+  var right = pos.left + increment;
+  var down = pos.top + increment;
+
+  left = left < 0 ? 0 : left;
+  up = up < 0 ? 0 : up;
+  right = right > $(window).width() - 220 ? $(window).width() - 220 : right;
+  down = down > $(window).height() - 375 ? $(window).height() - 375 : down;
+ 
+  if (e.which === 37) {  //player moves left
+    $player.css('left', left);
     //TODO: wrap $player.stop() in a conditional
     $player.stop();
-  }
-  // up pressed
-  if (e.which === 38) {
-    $player.css('top', pos.top - increment);
+  } else if (e.which === 38) { //player moves up
+    $player.css('top', up);
     $player.stop();
-  }
-  // right pressed
-  if (e.which === 39) {
-    $player.css('left', pos.left + increment);
+  } else if (e.which === 39) { //player moves right
+    $player.css('left', right);
     $player.stop();
-  }
-  // down pressed
-  if (e.which === 40) {
-    $player.css('top', pos.top + increment);
+  } else if (e.which === 40) { //player moves down
+    $player.css('top', down);
     $player.stop();
-  }
-
-  // spacebar (attack) pressed
-  if (e.which === 32) {
+  } else if (e.which === 32) { //player attacks (spacebar)
    
     dancers[player.id].$sword.css('animation', 'sword-rotation 1s');
     setTimeout(function() { dancers[player.id].$sword.css('animation', 'none'); }, 2000);

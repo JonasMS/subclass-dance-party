@@ -162,3 +162,8 @@ nav li:last-child{
   transform: rotate(20deg);
 }
 
+.player-dancer {
+  position: absolute;
+  z-index: 999;
+}
+
