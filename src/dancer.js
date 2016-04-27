@@ -15,6 +15,7 @@ var Dancer = function(top, left, character) {
   //Character Creation
 
   this.danceMode = '';
+  this.isDead = false;
 
   this.setPosition(top, left);
   //

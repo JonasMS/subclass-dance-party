@@ -1,16 +1,22 @@
+
 var distanceBetween = function(x1, y1, x2, y2) {
   return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
 };
 
 var playerAttack = function (playerId, dancerId) {
-  //target loses head
+  
+  killCount++;
+  $('.kill-count').html('COUNT ' + killCount);
+  
+  //set states
+  dancers[dancerId].danceMode = 'stop';
+  dancers[dancerId].isDead = true;
+  
+  //animations
   dancers[dancerId].$head.animate({
     top: 200
   }, 2000);
- // dancers[dancerId].$head.effect('explode');
   dancers[dancerId].$head.fadeOut('slow');
-  dancers[dancerId].danceMode = 'stop';
-  dancers[dancerId].dead = true;
   dancers[dancerId].$body.css('animation', 'body-fall 2s');
   setTimeout(function() { dancers[dancerId].$body.css('transform', 'rotate(90deg)'); }, 2000);
   setTimeout(function() { 
@@ -18,10 +24,10 @@ var playerAttack = function (playerId, dancerId) {
     // dancers.splice(dancerId); 
   }, 1000);
 
-
 };
 
 $(document).ready(function() {
+
 
   $('.lineUp-button').on('click', function() { lineUp(); });
   $('.cotillion-button').on('click', function() { cotillion(); });
@@ -41,7 +47,7 @@ $(document).ready(function() {
     _.each(dancers, function(dancer) {
       //get html object that has class dancer- + dancer.id
       styleSettings.left += 80;
-      if (!dancer.dead) {
+      if (!dancer.isDead) {
         dancer.danceMode = 'stop';
         $('.dancer-' + dancer.id).animate({
           top: styleSettings.top,
@@ -62,7 +68,7 @@ $(document).ready(function() {
 
     //give each group of dancers the same x-axis, different y-axis
     _.each(dancers, function(dancer, idx, collection) {
-      if (!dancer.dead) {
+      if (!dancer.isDead) {
         dancer.danceMode = 'stop';
         if ( idx >= (collection.length / 2) && !hasHalved ) {
         //when half of dancers are linedUp, left += x, reset top
@@ -83,7 +89,7 @@ $(document).ready(function() {
     
     //iterate through all objects and change their state to 'dance'
     _.each(dancers, function(dancer) {
-      if (dancer.constructor !== PlayerDancer && !dancer.dead) {
+      if (dancer.constructor !== PlayerDancer && !dancer.isDead) {
         dancer.danceMode = 'dance';
         dancer.move();
       }
@@ -115,10 +121,10 @@ $(document).ready(function() {
   //Position in dancers array should correlate with id
   var interaction = function (dancer1, dancer2) {
     //IF WhiteWalker comes into contact w/ HumanDancer
-    if ( dancer1.constructor === WalkerDancer && !dancer1.dead && dancer2.constructor !== WalkerDancer ) {
+    if ( dancer1.constructor === WalkerDancer && !dancer1.isDead && dancer2.constructor !== WalkerDancer ) {
       dancer2.constructor = WalkerDancer;
       dancer2.$head.css('background', 'url("assets/walkerHead.png") no-repeat');
-    } else if ( dancer2.constructor === WalkerDancer && !dancer2.dead && dancer1.constructor !== WalkerDancer ) {
+    } else if ( dancer2.constructor === WalkerDancer && !dancer2.isDead && dancer1.constructor !== WalkerDancer ) {
       dancer1.constructor = WalkerDancer;
       dancer1.$head.css('background', 'url("assets/walkerHead.png") no-repeat');
     }
@@ -152,7 +158,7 @@ $(document).keydown(function(e) {
 
   var $player = $('.player-dancer');
   var pos = $player.offset();
-  var increment = 10;
+  var increment = 15;
 
   var left = pos.left - increment; 
   var up = pos.top - increment;
@@ -179,15 +185,16 @@ $(document).keydown(function(e) {
     $player.stop();
   } else if (e.which === 32) { //player attacks (spacebar)
    
+    //sword animation
     dancers[player.id].$sword.css('animation', 'sword-rotation 1s');
     setTimeout(function() { dancers[player.id].$sword.css('animation', 'none'); }, 2000);
+
     //detect collisions between player and all dancers
     _.each(dancers, function(dancer, idx) {
-      dancer = $('.dancer-' + idx).offset();
-      if ( distanceBetween( pos.left, pos.top, dancer.left, dancer.top) <= 200 ) {
-        if ( idx !== player.id ) {
-          playerAttack(player.id, idx);
-        }
+      target = $('.dancer-' + idx).offset();
+      if ( distanceBetween( pos.left, pos.top, target.left, target.top) <= 200 && idx !== player.id && !dancer.isDead ) {
+        console.log('playerAttack being called: ' + killCount);
+        playerAttack(player.id, idx);
       }
     });
   }

@@ -167,3 +167,7 @@ nav li:last-child{
   z-index: 999;
 }
 
+.left-side {
+  float:left;
+}
+

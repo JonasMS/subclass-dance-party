@@ -31,6 +31,7 @@ $(document).ready(function() {
     body: 'dress'
   };
   window.player;
+  window.killCount = 0;
 
   var createDancer = function(creatorClass, character) {
     
@@ -64,6 +65,15 @@ $(document).ready(function() {
     createDancer(WalkerDancer, whiteWalker);
   });
 
+  $('.zombie-mode-button').on('click', function(event) {
+    var zombieInterval = setInterval(function() {
+      createDancer(WalkerDancer, whiteWalker); 
+      if ( player.constructor === WalkerDancer ) {
+        clearInterval(zombieInterval);
+      }
+    }, 2000);
+  });
+
   $('.human-button').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -88,5 +98,9 @@ $(document).ready(function() {
     createDancer( dancerMakerFunction, characters[_.random(0, characters.length - 1)] );
   });
   createDancer( PlayerDancer, characters[_.random(0, characters.length - 1)] );
+  
 });
+
+  
+
 
