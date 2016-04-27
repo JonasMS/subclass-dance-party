@@ -5,7 +5,11 @@ var distanceBetween = function(x1, y1, x2, y2) {
 
 var playerAttack = function (playerId, dancerId) {
   
-  killCount++;
+  if (dancers[dancerId].constructor === WalkerDancer) {
+    killCount++;
+  } else {
+    killCount--;
+  }
   $('.kill-count').html('COUNT ' + killCount);
   
   //set states
@@ -133,11 +137,11 @@ $(document).ready(function() {
 
     }
 
-    if (gameOver) { 
-      if (window.confirm('Game Over. Your score is ' + killCount + '. Start again? ')) {
-        // alert('here');
-      } 
-    }
+    // if (gameOver) { 
+    //   if (window.confirm('Game Over. Your score is ' + killCount + '. Start again? ')) {
+    //     // alert('here');
+    //   } 
+    // }
     //IF enemy characters make contact
   }; 
 
@@ -202,7 +206,6 @@ $(document).keydown(function(e) {
     _.each(dancers, function(dancer, idx) {
       target = $('.dancer-' + idx).offset();
       if ( distanceBetween( pos.left, pos.top, target.left, target.top) <= 200 && idx !== player.id && !dancer.isDead ) {
-        console.log('playerAttack being called: ' + killCount);
         playerAttack(player.id, idx);
       }
     });
