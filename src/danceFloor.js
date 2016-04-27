@@ -120,17 +120,26 @@ $(document).ready(function() {
   //TODO: need to lookup dancer's id? Why not just use i and j?
   //Position in dancers array should correlate with id
   var interaction = function (dancer1, dancer2) {
+    
     //IF WhiteWalker comes into contact w/ HumanDancer
     if ( dancer1.constructor === WalkerDancer && !dancer1.isDead && dancer2.constructor !== WalkerDancer ) {
+      if (dancer2.constructor === PlayerDancer) { gameOver = true; }
       dancer2.constructor = WalkerDancer;
       dancer2.$head.css('background', 'url("assets/walkerHead.png") no-repeat');
     } else if ( dancer2.constructor === WalkerDancer && !dancer2.isDead && dancer1.constructor !== WalkerDancer ) {
+      if (dancer1.constructor === PlayerDancer) { gameOver = true; }
       dancer1.constructor = WalkerDancer;
       dancer1.$head.css('background', 'url("assets/walkerHead.png") no-repeat');
+
     }
 
+    if (gameOver) { 
+      if (window.confirm('Game Over. Your score is ' + killCount + '. Start again? ')) {
+        // alert('here');
+      } 
+    }
     //IF enemy characters make contact
-  };
+  }; 
 
 
 

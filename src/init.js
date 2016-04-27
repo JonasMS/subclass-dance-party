@@ -33,6 +33,7 @@ $(document).ready(function() {
   window.player;
   window.killCount = 0;
 
+
   var createDancer = function(creatorClass, character) {
     
     var top = Math.floor(Math.random() * ($(window).height() - 300));
